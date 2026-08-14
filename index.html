@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag Guesser - Guess the Country Flag</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Login/Registration Section -->
+        <div id="auth-section" class="auth-container">
+            <div class="auth-box">
+                <h1>🚩 Flag Guesser</h1>
+                <p class="subtitle">Guess the country and climb the leaderboard!</p>
+                
+                <div id="login-form" class="form-container">
+                    <h2>Sign In</h2>
+                    
+                    <!-- Google Sign-In -->
+                    <div id="google-signin-container" class="google-signin-wrapper">
+                        <div id="g_id_onload"
+                             data-client_id="475942530940-l6c6d4k2gpdlkrulaqp1vjma5m6vn90s.apps.googleusercontent.com"
+                             data-callback="handleGoogleSignIn">
+                        </div>
+                        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="signin_with" data-shape="rectangular" data-logo_alignment="left"></div>
+                    </div>
+                    
+                    <!-- Divider -->
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+                    
+                    <!-- Guest Login -->
+                    <div class="guest-login">
+                        <input type="text" id="username" placeholder="Enter a username (optional)" required>
+                        <button id="guest-login-btn" class="btn-secondary">Continue as Guest</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Section -->
+        <div id="game-section" class="game-container" style="display: none;">
+            <header class="game-header">
+                <div class="header-left">
+                    <h1>🚩 Flag Guesser</h1>
+                    <div class="user-info">
+                        <span id="username-display"></span>
+                        <span id="location-display" class="location"></span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="score-card">
+                        <div class="score">
+                            <span class="score-label">Score</span>
+                            <span id="score-display" class="score-value">0</span>
+                        </div>
+                        <div class="streak">
+                            <span class="streak-label">Streak</span>
+                            <span id="streak-display" class="streak-value">0</span>
+                        </div>
+                    </div>
+                    <button id="leaderboard-btn" class="btn-secondary">🏆 Leaderboard</button>
+                    <button id="logout-btn" class="btn-secondary">Logout</button>
+                </div>
+            </header>
+
+            <main class="game-main">
+                <!-- Game Board -->
+                <div class="game-board">
+                    <div class="flag-display">
+                        <img id="flag-image" src="" alt="Country Flag" class="flag">
+                    </div>
+
+                    <div class="question-section">
+                        <h2>What country is this flag?</h2>
+                        <div class="options" id="options-container">
+                            <!-- Options will be inserted here -->
+                        </div>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <p id="progress-text" class="progress-text">Questions Answered: 0</p>
+                </div>
+            </main>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <div id="leaderboard-section" class="leaderboard-container" style="display: none;">
+            <div class="leaderboard-box">
+                <div class="leaderboard-header">
+                    <h2>🏆 Global Leaderboard</h2>
+                    <button id="back-to-game-btn" class="btn-secondary">Back to Game</button>
+                </div>
+
+                <div class="leaderboard-filters">
+                    <button class="filter-btn active" data-filter="global">Global</button>
+                    <button class="filter-btn" data-filter="today">Today</button>
+                    <button class="filter-btn" data-filter="week">This Week</button>
+                    <button class="filter-btn" data-filter="month">This Month</button>
+                </div>
+
+                <div class="leaderboard-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>Location</th>
+                                <th>Score</th>
+                                <th>Streak</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body">
+                            <!-- Leaderboard entries will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Modal -->
+        <div id="results-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2 id="result-message"></h2>
+                <p id="result-answer"></p>
+                <div class="result-stats">
+                    <p>Score: <span id="result-score"></span></p>
+                    <p>Streak: <span id="result-streak"></span></p>
+                </div>
+                <button id="next-btn" class="btn-primary">Next Flag</button>
+                <button id="finish-btn" class="btn-secondary" style="display: none;">Finish Game</button>
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div id="gameover-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Game Over!</h2>
+                <div class="final-stats">
+                    <p>Final Score: <span id="final-score"></span></p>
+                    <p>Best Streak: <span id="final-streak"></span></p>
+                </div>
+                <button id="play-again-btn" class="btn-primary">Play Again</button>
+                <button id="view-leaderboard-btn" class="btn-secondary">View Leaderboard</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
